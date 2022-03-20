@@ -6,6 +6,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Stack(
+      children: [
+        Image.asset("assets/images/main_back.png"),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Islami"),
+          ),
+        ),
+      ],
+    );
   }
 }
