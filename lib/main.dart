@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami/homeScreen.dart';
-import 'package:islami/myThemeData.dart';
+import 'package:islami/module/homeScreen.dart';
+import 'package:islami/styles/myThemeData.dart';
 
 void main() {
   runApp(const MyApp());
