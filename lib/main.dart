@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami/module/homeScreen.dart';
+import 'package:islami/models/suraDitels.dart';
+import 'package:islami/module/homeSceen/homeScreen.dart';
 import 'package:islami/styles/myThemeData.dart';
 
 void main() {
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Islami',
-      routes: {HomeScreen.routeName: (buildContext) => HomeScreen()},
+      routes: {
+        HomeScreen.routeName: (buildContext) => HomeScreen(),
+        SuraDetails.routName: (buildContext) => SuraDetails()
+      },
       initialRoute: HomeScreen.routeName,
       theme: MyThemeData.lightTheme,
     );
