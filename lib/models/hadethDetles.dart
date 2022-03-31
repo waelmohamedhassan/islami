@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:islami/models/itemBodyHageth.dart';
+import 'package:islami/module/homeSceen/tabs/hadethTab.dart';
 import 'package:islami/shared/components/appbar.dart';
 
-import 'itemVerses.dart';
-
-class SuraDetails extends StatefulWidget {
-  static const String routName = "SuraDetailsScreen";
-
-  @override
-  State<SuraDetails> createState() => _SuraDetailsState();
-}
-
-class _SuraDetailsState extends State<SuraDetails> {
+class HadethDetails extends StatelessWidget {
+  static const String routName = "HadethDetailsScreen";
   List<String> verses = [];
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArg;
-    if (verses.length == 0) loadFile("${args.index + 1}");
+    Hadeth hadeth = ModalRoute.of(context)!.settings.arguments as Hadeth;
+    verses = hadeth.content;
 
     return Stack(
       children: [
@@ -27,12 +20,12 @@ class _SuraDetailsState extends State<SuraDetails> {
           width: double.infinity,
         ),
         Scaffold(
-          appBar: appbarItem(text: args.suraName),
+          appBar: appbarItem(text: hadeth.title),
           body: verses.length == 0
               ? Center(child: CircularProgressIndicator())
               : ListView.separated(
                   itemBuilder: (buildContext, index) {
-                    return ItemVerses(verses[index], index + 1);
+                    return ItemBodyHadeth(verses[index]);
                   },
                   itemCount: verses.length,
                   separatorBuilder: (buildContext, index) {
@@ -48,19 +41,4 @@ class _SuraDetailsState extends State<SuraDetails> {
       ],
     );
   }
-
-  void loadFile(String fileName) async {
-    String fileContent =
-        await rootBundle.loadString("assets/files/quran/$fileName.txt");
-    List<String> verses = fileContent.split("\n");
-    this.verses = verses;
-    setState(() {});
-  }
-}
-
-class SuraDetailsArg {
-  String suraName;
-  int index;
-
-  SuraDetailsArg({required this.suraName, required this.index});
 }
